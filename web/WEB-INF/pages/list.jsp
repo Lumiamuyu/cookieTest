@@ -34,7 +34,8 @@
 
 
 
-
+    <h2>欢迎${user.username}</h2>
+    <a href="exit">退出</a>
     <table>
         <thead>
             <tr>
@@ -53,7 +54,7 @@
                 <td>${pro.productId}</td>
                 <td>${pro.productName}</td>
                 <td>${pro.price}</td>
-                <td>${pro.url}</td>
+                <td><img src="${pro.url}" alt="pic"></td>
                 <td>${pro.productDes}</td>
                 <td><a href="delete?productId=${pro.productId}"><input type="button" value="删除"></a>&nbsp;<a href="update?productId=${pro.productId}"><input type="button" value="修改"></a></td>
             </tr>

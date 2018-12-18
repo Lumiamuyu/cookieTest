@@ -12,7 +12,7 @@
     <title>登录</title>
 </head>
 <body>
-<form action="doLogin" method="get" id="fm">
+<form action="doLogin" method="post" id="fm">
     用户名：<input type="text" name="uname" >
     密码：<input type="password" name="pwd" >
     <input type="submit" value="登录" id="btn">
