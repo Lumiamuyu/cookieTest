@@ -7,11 +7,9 @@ import Lumiamuyu.service.ProductServiceImpl;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 import java.io.*;
+import java.util.Map;
 
 @MultipartConfig
 @WebServlet("/doAdd")
@@ -20,6 +18,7 @@ public class DoAddServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+        HttpSession session = req.getSession();
         /*req.getRequestDispatcher("WEB-INF/pages/imgtest.jsp").forward(req,resp);*/
         Part part = req.getPart("url");
         String str = "C:\\Users\\Lumia\\IdeaProjects\\cookieTest\\web\\img\\"+part.getSubmittedFileName();

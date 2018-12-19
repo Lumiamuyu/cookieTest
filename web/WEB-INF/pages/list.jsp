@@ -28,6 +28,10 @@
             background-color: #555555;
             color: white;
         }
+        table tbody tr td img{
+            height: 50px;
+            width: 50px;
+        }
     </style>
 </head>
 <body>
@@ -36,6 +40,12 @@
 
     <h2>欢迎${user.username}</h2>
     <a href="exit">退出</a>
+
+    <form method="post">
+        <input type="text" name="text" value="${text}">
+        <input type="submit" value="搜索">
+    </form>
+    
     <table>
         <thead>
             <tr>

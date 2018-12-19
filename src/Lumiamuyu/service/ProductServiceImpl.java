@@ -33,4 +33,9 @@ public class ProductServiceImpl implements IProductService {
     public int update(Product product) {
         return dao.update(product);
     }
+
+    @Override
+    public List<Product> getResult(String text) {
+        return dao.getResult(text);
+    }
 }

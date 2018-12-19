@@ -10,4 +10,5 @@ public interface IProductService {
     public int dele(int id);
     public Product getOne(int id);
     public int update(Product product);
+    public List<Product> getResult(String text);
 }

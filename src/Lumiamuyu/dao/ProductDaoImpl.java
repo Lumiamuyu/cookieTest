@@ -64,4 +64,25 @@ public class ProductDaoImpl implements IProductDao {
     public int update(Product product) {
         return JDBCUtil.executeUpdate("update product set product_name=?,product_des=?,url=?,price=? where product_id=?",product.getProductName(),product.getProductDes(),product.getUrl(),product.getPrice(),product.getProductId());
     }
+
+    @Override
+    public List<Product> getResult(String text) {
+        /*concat('%',?,'%')*/
+        return JDBCUtil.executeQuery("select * from product where product_name like ?", new RowMap<Product>() {
+            @Override
+            public Product RowMapping(ResultSet resultSet) {
+                Product p = new Product();
+                try {
+                    p.setProductName(resultSet.getString("product_name"));
+                    p.setProductDes(resultSet.getString("product_des"));
+                    p.setUrl(resultSet.getString("url"));
+                    p.setPrice(resultSet.getDouble("price"));
+                    p.setProductId(resultSet.getInt("product_id"));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return p;
+            }
+        }, text);
+    }
 }

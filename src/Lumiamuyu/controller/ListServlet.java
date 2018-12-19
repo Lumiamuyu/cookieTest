@@ -22,8 +22,18 @@ import java.util.Map;
 public class ListServlet extends HttpServlet {
     private IProductService service = new ProductServiceImpl();
     private IUserService uService = new UserServiceImpl();
+
+/*
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Product> lists = service.getLists();
+        req.setAttribute("lists", lists);
+        req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req, resp);
+    }
+*/
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         resp.setCharacterEncoding("UTF-8");
         resp.setHeader("content-type", "text/html;charset=UTF-8");
@@ -36,7 +46,7 @@ public class ListServlet extends HttpServlet {
         User u =  (User)session.getAttribute("user");
         List<Product> lists = service.getLists();
         String lis = JSONObject.toJSONString(lists);
-        System.out.println(lis);
+        /*System.out.println(lis);*/
         req.setAttribute("lists", lists);
         if (u==null){
             User user = uService.getOne(uname);
@@ -46,5 +56,22 @@ public class ListServlet extends HttpServlet {
             req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req, resp);
         }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        String text =req.getParameter("text");
+        text = "%"+text+"%";
+        if (text==""){
+            List<Product> lists = service.getLists();
+            req.setAttribute("lists", lists);
+            req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req, resp);
+        }else{
+            List<Product> lists = service.getResult(text);
+            req.setAttribute("lists", lists);
+            req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req, resp);
+        }
+    }
+
 
 }
