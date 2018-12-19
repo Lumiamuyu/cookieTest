@@ -20,7 +20,7 @@ public class DoAddServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        req.getRequestDispatcher("WEB-INF/pages/imgtest.jsp").forward(req,resp);
+        /*req.getRequestDispatcher("WEB-INF/pages/imgtest.jsp").forward(req,resp);*/
         Part part = req.getPart("url");
         String str = "C:\\Users\\Lumia\\IdeaProjects\\cookieTest\\web\\img\\"+part.getSubmittedFileName();
         String url = str.substring(str.indexOf("img"));

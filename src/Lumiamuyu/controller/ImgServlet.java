@@ -1,3 +1,4 @@
+/*
 package Lumiamuyu.controller;
 
 import javax.servlet.ServletException;
@@ -32,3 +33,4 @@ public class ImgServlet extends HttpServlet {
 
     }
 }
+*/
