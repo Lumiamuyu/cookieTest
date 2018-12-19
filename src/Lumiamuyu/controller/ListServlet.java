@@ -61,7 +61,7 @@ public class ListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         String text =req.getParameter("text");
-        text = "%"+text+"%";
+        text="%"+text+"%";
         if (text==""){
             List<Product> lists = service.getLists();
             req.setAttribute("lists", lists);
@@ -72,6 +72,4 @@ public class ListServlet extends HttpServlet {
             req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req, resp);
         }
     }
-
-
 }
