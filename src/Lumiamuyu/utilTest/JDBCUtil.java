@@ -141,5 +141,32 @@ public class JDBCUtil {
         return t;
     }
 
+    public static <T> int executeCount(String sql, Object... objects){
+        int a = 0;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        connection = getConnection();
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+
+            if (objects !=null){
+                for (int i = 0; i<objects.length;i++){
+                    preparedStatement.setObject(i+1,objects[i]);
+                }}
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                a=resultSet.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            close(null,preparedStatement,connection);
+        }
+        return a;
+    }
+
 
 }

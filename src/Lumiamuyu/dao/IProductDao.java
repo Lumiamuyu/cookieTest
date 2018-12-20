@@ -11,4 +11,6 @@ public interface IProductDao {
     public Product getOne(int id);
     public int update(Product product);
     public List<Product> getResult(String text);
+    public List<Product> getLists(int pageNo,int pageSize);
+    public int getCount();
 }

@@ -32,6 +32,29 @@
             height: 50px;
             width: 50px;
         }
+        ul{
+            list-style: none;
+        }
+        ul li{
+            float: left;
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: darkgrey 1px solid;
+        }
+        ul li a{
+            text-decoration: none;
+            color: #555555;
+        }
+        ul .page{
+            width: 80px;
+            height: 30px;
+        }
+        ul li:hover{
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -59,7 +82,7 @@
         </thead>
         <tbody>
 
-        <c:forEach items="${lists}" var="pro">
+        <c:forEach items="${data.lists}" var="pro">
             <tr>
                 <td>${pro.productId}</td>
                 <td>${pro.productName}</td>
@@ -80,5 +103,11 @@
     });
 
 </script>--%>
+    <ul>
+        ${data.pageView}
+    </ul>
+
+
+
 </body>
 </html>

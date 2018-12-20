@@ -85,4 +85,29 @@ public class ProductDaoImpl implements IProductDao {
             }
         }, text);
     }
+
+    @Override
+    public List<Product> getLists(int pageNo, int pageSize) {
+        return JDBCUtil.executeQuery("select * from product limit ?,?", new RowMap<Product>() {
+            @Override
+            public Product RowMapping(ResultSet resultSet) {
+                Product p = new Product();
+                try {
+                    p.setProductName(resultSet.getString("product_name"));
+                    p.setProductDes(resultSet.getString("product_des"));
+                    p.setUrl(resultSet.getString("url"));
+                    p.setPrice(resultSet.getDouble("price"));
+                    p.setProductId(resultSet.getInt("product_id"));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return p;
+            }
+        },(pageNo-1)*pageSize,pageSize);
+    }
+
+    @Override
+    public int getCount() {
+        return JDBCUtil.executeCount("select count(*) from product",null);
+    }
 }

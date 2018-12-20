@@ -2,6 +2,7 @@ package Lumiamuyu.controller;
 
 
 import Lumiamuyu.pojo.Product;
+import Lumiamuyu.pojo.ResultData;
 import Lumiamuyu.pojo.User;
 import Lumiamuyu.service.IProductService;
 import Lumiamuyu.service.IUserService;
@@ -34,6 +35,13 @@ public class ListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int pageNo = req.getParameter("pageNo")==null?1:Integer.parseInt(req.getParameter("pageNo"));
+        int pageSize = 5;
+        ResultData data = service.getLists(pageNo,pageSize);
+        data.setUrl("list");
+        req.setAttribute("data",data);
+
+        /*List<Product> lists = service.getLists();*/
         HttpSession session = req.getSession();
         resp.setCharacterEncoding("UTF-8");
         resp.setHeader("content-type", "text/html;charset=UTF-8");
@@ -44,10 +52,9 @@ public class ListServlet extends HttpServlet {
         Cookie coo = maps.get("username");
         String uname = coo.getValue();
         User u =  (User)session.getAttribute("user");
-        List<Product> lists = service.getLists();
-        String lis = JSONObject.toJSONString(lists);
+        /*String lis = JSONObject.toJSONString(lists);*/
         /*System.out.println(lis);*/
-        req.setAttribute("lists", lists);
+        /*req.setAttribute("lists", lists);*/
         if (u==null){
             User user = uService.getOne(uname);
             session.setAttribute("user",user);
